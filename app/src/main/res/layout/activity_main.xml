@@ -8,29 +8,68 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="JobInstances"
+        android:text="Get JobInstances"
         android:id="@+id/button_jobInstances"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView_jobInstances"
-        android:layout_below="@+id/button_jobInstances"
-        android:layout_centerHorizontal="true"
-        android:choiceMode="none" />
+        android:layout_marginTop="71dp"
+        android:layout_below="@+id/button_populate_jobInstances"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PopulateJobInstance"
         android:id="@+id/button_populate_jobInstances"
-        android:layout_alignTop="@+id/button_jobInstances"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get last JobInstance"
+        android:id="@+id/button_jobInstance"
+        android:layout_below="@+id/button_jobInstances"
+        android:layout_alignRight="@+id/button_populate_jobInstances"
+        android:layout_alignEnd="@+id/button_populate_jobInstances" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update jobInstance"
+        android:id="@+id/button_update_jobInstance"
+        android:layout_below="@+id/button_jobInstance"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get RestState"
+        android:id="@+id/button_get_restState"
+        android:layout_below="@+id/button_update_jobInstance"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Last JobInstance"
+        android:id="@+id/button_delete"
+        android:layout_below="@+id/button_update_restState"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update RestState"
+        android:id="@+id/button_update_restState"
+        android:layout_below="@+id/button_get_restState"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Range"
+        android:id="@+id/button_delete_range"
+        android:layout_below="@+id/button_delete"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

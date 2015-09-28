@@ -47,7 +47,7 @@ public class JobInstancesDS {
         ContentValues contentValues = new ContentValues();
         contentValues.put(JobInstancesTable.COLUMN_BODY, instance.getBody());
 
-        database.update(JobInstancesTable.TABLE_NAME, contentValues, JobInstancesTable.COLUMN_INSTANCEID + "=?",
+        database.update(JobInstancesTable.TABLE_NAME, contentValues, JobInstancesTable.COLUMN_INSTANCEID + " = ? ",
                 new String[]{"" + instance.getId()});
 
     }
@@ -80,7 +80,7 @@ public class JobInstancesDS {
     }
 
     public RestState getRestState(long jobInstanceId){
-        Cursor cursor = database.query(JobInstancesTable.TABLE_NAME,new String[]{JobInstancesTable.COLUMN_REST_STATE},JobInstancesTable.CREATE_TABLE + "=?",
+        Cursor cursor = database.query(JobInstancesTable.TABLE_NAME,new String[]{JobInstancesTable.COLUMN_REST_STATE},JobInstancesTable.COLUMN_ID + " = ?",
                 new String[]{""+jobInstanceId},null,null,null);
         checkOneJobInstance(cursor, jobInstanceId);
         cursor.moveToNext();
@@ -89,10 +89,18 @@ public class JobInstancesDS {
 
     public void updateRestState(long jobInstanceId, RestState restState){
         ContentValues cv = new ContentValues();
-        cv.put(JobInstancesTable.COLUMN_REST_STATE,restState.ordinal());
-        database.update(JobInstancesTable.TABLE_NAME,cv,JobInstancesTable.COLUMN_INSTANCEID + "=?", new String[]{"" + jobInstanceId});
+        cv.put(JobInstancesTable.COLUMN_REST_STATE, restState.ordinal());
+        database.update(JobInstancesTable.TABLE_NAME, cv, JobInstancesTable.COLUMN_INSTANCEID + " = ? ", new String[]{"" + jobInstanceId});
 
 
+    }
+
+    public void deleteJobInstances(long fromId, long toId){
+        database.delete(JobInstancesTable.TABLE_NAME, JobInstancesTable.COLUMN_ID + " between ? and > ",new String[]{fromId+"",toId+""});
+    }
+
+    public void deleteJobInstance(long jobInstanceId){
+        database.delete(JobInstancesTable.TABLE_NAME,JobInstancesTable.COLUMN_ID + " = ? ",new String[]{"" + jobInstanceId});
     }
 
     private JsonResponseObject getJobInstance(Cursor cursor){
@@ -107,9 +115,7 @@ public class JobInstancesDS {
         catch(NullPointerException e){
             Log.i("MobileClient" , "JobInstancesDS " + e.getStackTrace());
         }
-        finally {
-            cursor.close();
-        }
+
         return response;
     }
 
@@ -119,5 +125,7 @@ public class JobInstancesDS {
             Log.e("[DEBUG]",cursor.toString());
             throw new IllegalStateException("Cannot get more than one jobInstance records for jobInstanceId " + jobInstanceId);
         }
+
+
     }
 }

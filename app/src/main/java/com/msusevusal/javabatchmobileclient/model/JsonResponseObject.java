@@ -14,6 +14,19 @@ public class JsonResponseObject  {
 
     public JsonResponseObject(){};
 
+
+
+    @Override
+    public int hashCode() {
+        return (int) id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if( o == null) return false;
+        return (id == ((JsonResponseObject)o).getId());
+    }
+
     public JsonResponseObject(long id, long parentId, RestState state, String body){
         this.id = id;
         this.parentId = parentId;
